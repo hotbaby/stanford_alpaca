@@ -37,7 +37,7 @@ model = model.cuda()
 print("inference ...")
 prompts = [
     "I believe the meaning of life is",
-    "介绍下百度公司，"
+    "介绍下百度的文心一言"
 ]
 
 for prompt in prompts:
