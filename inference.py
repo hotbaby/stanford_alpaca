@@ -9,6 +9,7 @@ from transformers import LlamaConfig
 from transformers import LlamaForCausalLM
 from transformers import LlamaModel
 from transformers import Trainer
+from train import PROMPT_DICT
 
 
 model_dir = "/data/models/alpaca"
@@ -36,11 +37,12 @@ model = model.cuda()
 
 print("inference ...")
 prompts = [
-    "I believe the meaning of life is",
+    # "I believe the meaning of life is",
     "介绍下百度的文心一言"
 ]
 
 for prompt in prompts:
+    prompt = PROMPT_DICT["prompt_no_input"].format(instruction=prompt)
     tokens = tokenizer.encode(prompt)
     tokens = torch.tensor(tokens, dtype=torch.long, device=torch.device("cuda:0")).unsqueeze(0)
     result = model.generate(tokens, max_length=256)
